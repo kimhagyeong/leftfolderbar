@@ -18,9 +18,14 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.ViewHolder> {
+<<<<<<< HEAD
     private int chipSize = 10;
     private ArrayList<String> imageBitmapList = null ;
     private Context context;
+=======
+
+    private ArrayList<Bitmap> mData = null ;
+>>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
