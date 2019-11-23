@@ -20,12 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FragmentFolder"
-            android:label="FragmentFolder"/>
-        <activity
-            android:name=".FragmentPhoto"
-            android:label="FragmentPhoto"/>
+
     </application>
 
 </manifest>

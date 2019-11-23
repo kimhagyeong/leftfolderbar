@@ -10,9 +10,5 @@
         icon="@drawable/folderimg"
         title="Bubbling Folder"
         />
-    <!--
-    <tab
-        id="@+id/tab_friends"
-        icon="@drawable/ic_friends"
-        title="Friends" />-->
+
 </tabs>
