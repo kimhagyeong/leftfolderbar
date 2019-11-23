@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
             if(!s.isHidden())
                 for(File k:s.listFiles())
                     imageBitmapList.add(k.getAbsolutePath());
+
+                
         }
         imageBitmapList.sort(null);
     }
