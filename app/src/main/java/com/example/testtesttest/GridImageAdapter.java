@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.ViewHolder> {
 
-    private ArrayList<Bitmap> mData = nul   l ;
+    private ArrayList<Bitmap> mData = null ;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
