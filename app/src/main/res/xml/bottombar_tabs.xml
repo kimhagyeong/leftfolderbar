@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_favorites"
+        icon="@drawable/folderimg"
+        title="Bubbling Photo"
+        />
+    <tab
+        id="@+id/tab_nearby"
+        icon="@drawable/folderimg"
+        title="Bubbling Folder"
+        />
+    <!--
+    <tab
+        id="@+id/tab_friends"
+        icon="@drawable/ic_friends"
+        title="Friends" />-->
+</tabs>

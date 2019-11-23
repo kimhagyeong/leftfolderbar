@@ -1,32 +1,56 @@
 package com.example.testtesttest;
+//
+import android.os.Build;
+import android.os.Bundle;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
+
+//
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
+
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ///////툴바랑 하단메뉴바 설정중
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //툴바 액티비티 이름대로 사용안할때
@@ -34,19 +58,26 @@ public class MainActivity extends AppCompatActivity {
         //이름은 이렇게 바꿔요
         toolbar.setTitle("tt");
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
+        // We're doing nothing with this listener here this time. Check example usage
+        // from ThreeTabsActivity on how to use it.
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onTabSelected(@IdRes int tabId) {
+
             }
         });
 
+
+
+
+        //Test용 객체 생성..
         ArrayList<String> list = new ArrayList<>();
         for (int i=0; i<30; i++) {
             list.add(String.format("TEXT %d", i)) ;
         }
+
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         RecyclerView sideBar = findViewById(R.id.sidebar_recycler) ;
@@ -95,9 +126,12 @@ public class MainActivity extends AppCompatActivity {
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         GridImageAdapter gridAdapter = new GridImageAdapter(imageBitmapList) ;
         gridImage.setAdapter(gridAdapter) ;
-//////////////////////////////////////////
+
 
     }
+
+    //////////////////////////////////////////buttomlistenr
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
