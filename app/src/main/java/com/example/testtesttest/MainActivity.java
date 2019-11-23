@@ -1,26 +1,49 @@
 package com.example.testtesttest;
 
+import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
+    RecyclerView gridImage;
+    ArrayList<String> imageBitmapList = new ArrayList<>();
+    GridImageAdapter gridAdapter;
+    File loadPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        gridImage = findViewById(R.id.gridImage_recycler) ;
+        gridImage.setHasFixedSize(true);
+        gridImage.setLayoutManager(new GridLayoutManager(this, 3)) ;
+        gridAdapter = new GridImageAdapter(imageBitmapList, this) ;
+        gridImage.setAdapter(gridAdapter) ;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,48 +79,21 @@ public class MainActivity extends AppCompatActivity {
         // 리사이클러뷰에 SideImageAdapter 객체 지정.
         SideImageAdapter sideAdapter = new SideImageAdapter(list) ;
         sideBar.setAdapter(sideAdapter) ;
+    }
 
-        /////////////////////////////////////////
-        ArrayList<Bitmap> imageBitmapList = new ArrayList<>();
-
-        // Bitmap 사용시 나타나는 memory 부족 현상을 예방하기 위한 code. 경우에 따라서는 생략해도 가능하다.
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-
-        int width = options.outWidth;
-        int height = options.outHeight;
-        int inSampleSize = 1;
-        int reqWidth = 256;
-        int reqHeight = 192;
-        if((width > reqWidth) || (height > reqHeight)){
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onResume() {
+        super.onResume();
+        imageBitmapList.clear();
+        String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        loadPath = new File(sdPath+"/DCIM");
+        for(File s:loadPath.listFiles()) {
+            if(!s.isHidden())
+                for(File k:s.listFiles())
+                    imageBitmapList.add(k.getAbsolutePath());
         }
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-
-        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.image);
-        bm = ThumbnailUtils.extractThumbnail(bm, 300, 300); // 크기가 큰 원본에서 image를 300*300 thumnail을 추출.
-
-
-        for (int i=0; i<20; i++) {
-            imageBitmapList.add(bm) ;
-        }
-        RecyclerView gridImage = findViewById(R.id.gridImage_recycler) ;
-        gridImage.setLayoutManager(new GridLayoutManager(this, 3)) ;
-
-        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        GridImageAdapter gridAdapter = new GridImageAdapter(imageBitmapList) ;
-        gridImage.setAdapter(gridAdapter) ;
-//////////////////////////////////////////
-
+        imageBitmapList.sort(null);
     }
 
     @Override
