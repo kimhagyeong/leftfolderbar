@@ -93,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 for(File k:s.listFiles())
                     imageBitmapList.add(k.getAbsolutePath());
 
-                
         }
         imageBitmapList.sort(null);
+        
     }
 
     @Override
