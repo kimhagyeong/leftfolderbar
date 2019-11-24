@@ -1,60 +1,26 @@
 package com.example.testtesttest;
 
-<<<<<<< HEAD
-import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
-=======
+
 import android.os.Bundle;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
->>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.ThumbnailUtils;
-<<<<<<< HEAD
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import androidx.annotation.RequiresApi;
-=======
 import androidx.annotation.IdRes;
->>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-<<<<<<< HEAD
-
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-=======
-import android.view.Menu;
-import android.view.MenuItem;
->>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,27 +44,18 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("tt");
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-
-<<<<<<< HEAD
-        gridImage = findViewById(R.id.gridImage_recycler) ;
-        gridImage.setHasFixedSize(true);
-        gridImage.setLayoutManager(new GridLayoutManager(this, 3)) ;
-        gridAdapter = new GridImageAdapter(imageBitmapList, this) ;
-        gridImage.setAdapter(gridAdapter) ;
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-=======
-        // We're doing nothing with this listener here this time. Check example usage
-        // from ThreeTabsActivity on how to use it.
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
->>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
             @Override
             public void onTabSelected(@IdRes int tabId) {
 
             }
         });
 
+        gridImage = findViewById(R.id.gridImage_recycler) ;
+        gridImage.setHasFixedSize(true);
+        gridImage.setLayoutManager(new GridLayoutManager(this, 3)) ;
+        gridAdapter = new GridImageAdapter(imageBitmapList, this) ;
+        gridImage.setAdapter(gridAdapter) ;
 
 
 
@@ -131,19 +88,12 @@ public class MainActivity extends AppCompatActivity {
                     imageBitmapList.add(k.getAbsolutePath());
 
         }
-<<<<<<< HEAD
+
         imageBitmapList.sort(null);
         
-=======
-        RecyclerView gridImage = findViewById(R.id.gridImage_recycler) ;
-        gridImage.setLayoutManager(new GridLayoutManager(this, 3)) ;
-
-        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        GridImageAdapter gridAdapter = new GridImageAdapter(imageBitmapList) ;
-        gridImage.setAdapter(gridAdapter) ;
 
 
->>>>>>> 622c6346bdad7803d22ead8550ca2930e05204ac
+
     }
 
     //////////////////////////////////////////buttomlistenr
